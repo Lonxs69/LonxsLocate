@@ -45,8 +45,8 @@ class TestOrbita(unittest.TestCase):
 
 class TestEnlace(unittest.TestCase):
     def test_satelite_en_cenit(self):
-        est = Estacion("e", "uplink", "", 4.0, -74.0)
-        el, d = geometria(est.posicion_eci(rotacion=False), satelite_sobre(4.0, -74.0, 600))
+        est = Estacion("e", "uplink", "", 18.5, -70.0)
+        el, d = geometria(est.posicion_eci(rotacion=False), satelite_sobre(18.5, -70.0, 600))
         self.assertAlmostEqual(el, 90.0, places=4)
         self.assertAlmostEqual(d, 600.0, places=4)
 
@@ -62,8 +62,8 @@ class TestEnlace(unittest.TestCase):
         self.assertAlmostEqual(radio_huella_km(600, 0), RADIO_TIERRA * math.acos(RADIO_TIERRA / 6_971))
 
     def test_geo_fijo_sobre_su_longitud_con_rotacion(self):
-        est = Estacion("e", "uplink", "", 0.0, -74.0)
-        geo = satelite_geo(longitud_deg=-74.0)
+        est = Estacion("e", "uplink", "", 0.0, -70.0)
+        geo = satelite_geo(longitud_deg=-70.0)
         for t in (0, 3_600, 43_200):
             self.assertGreater(elevacion(est, geo, t), 89.0)
 
@@ -74,23 +74,24 @@ class TestDatos(unittest.TestCase):
         self.assertEqual(len(estaciones), 15)
         for e in estaciones:
             self.assertIn(e.tipo, ("uplink", "downlink"))
-            self.assertTrue(-5 < e.latitud < 14 and -82 < e.longitud < -66, e.nombre)
+            self.assertTrue(17.5 < e.latitud < 20 and -72.1 < e.longitud < -68.3, e.nombre)
 
     def test_busqueda_sin_distinguir_mayusculas(self):
-        self.assertEqual(buscar_estacion("bogotá").region, "Cundinamarca")
+        self.assertEqual(buscar_estacion("santo domingo").region, "Distrito Nacional")
+        self.assertEqual(buscar_estacion("JIMANÍ").region, "Independencia")
         with self.assertRaises(KeyError):
             buscar_estacion("Madrid")
 
 
 class TestCobertura(unittest.TestCase):
-    def test_constelacion_densa_cubre_colombia(self):
-        est = [buscar_estacion("Uribia"), buscar_estacion("Leticia")]
+    def test_constelacion_densa_cubre_rd(self):
+        est = [buscar_estacion("Pedernales"), buscar_estacion("Dajabón")]
         res = simular_cobertura(est, constelacion_walker(20, 10), duracion_h=3, paso_s=120)
         for r in res:
             self.assertGreater(r.porcentaje, 95)
 
     def test_un_satelite_deja_huecos(self):
-        est = [buscar_estacion("Bogotá")]
+        est = [buscar_estacion("Santo Domingo")]
         res = simular_cobertura(est, constelacion_walker(1, 1), duracion_h=6, paso_s=60)
         self.assertLess(res[0].porcentaje, 30)
         self.assertGreater(res[0].hueco_maximo_min, 60)
