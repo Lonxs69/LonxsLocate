@@ -1,37 +1,37 @@
-% Definition of geographic coordinates for Bogotá (latitude and longitude)
-lat_bogota = 4.7110;   % Latitude of Bogotá (in degrees)
-lon_bogota = -74.0721;  % Longitude of Bogotá (in degrees)
+% Definition of geographic coordinates for Santo Domingo (latitude and longitude)
+lat_santodomingo = 18.4861;   % Latitude of Santo Domingo (in degrees)
+lon_santodomingo = -69.9312;  % Longitude of Santo Domingo (in degrees)
 
-% Geographic coordinates for Uribia (download)
-lat_uribia = 11.6833;   % Latitude of Uribia (in degrees)
-lon_uribia = -72.2042;  % Longitude of Uribia (in degrees)
+% Geographic coordinates for Pedernales (download)
+lat_pedernales = 18.0384;   % Latitude of Pedernales (in degrees)
+lon_pedernales = -71.7440;  % Longitude of Pedernales (in degrees)
 
 % Parameters of the LEO satellite
 altitude_satellite = 600;  % Altitude in km
-lat_satellite = 5.0;      % Latitude of the satellite over Colombia (approximate)
-lon_satellite = -74.0;    % Longitude of the satellite over Colombia (approximate)
+lat_satellite = 18.7;      % Latitude of the satellite over the Dominican Republic (approximate)
+lon_satellite = -70.5;    % Longitude of the satellite over the Dominican Republic (approximate)
 
 % Earth's radius (in km)
 radius_earth = 6371;
 
 % Convert geographic coordinates to radians
-lat_bogota_rad = deg2rad(lat_bogota);
-lon_bogota_rad = deg2rad(lon_bogota);
-lat_uribia_rad = deg2rad(lat_uribia);
-lon_uribia_rad = deg2rad(lon_uribia);
+lat_santodomingo_rad = deg2rad(lat_santodomingo);
+lon_santodomingo_rad = deg2rad(lon_santodomingo);
+lat_pedernales_rad = deg2rad(lat_pedernales);
+lon_pedernales_rad = deg2rad(lon_pedernales);
 lat_satellite_rad = deg2rad(lat_satellite);
 lon_satellite_rad = deg2rad(lon_satellite);
 
 % Cartesian coordinates
-% Bogotá
-x_bogota = radius_earth * cos(lat_bogota_rad) * cos(lon_bogota_rad);
-y_bogota = radius_earth * cos(lat_bogota_rad) * sin(lon_bogota_rad);
-z_bogota = radius_earth * sin(lat_bogota_rad);
+% Santo Domingo
+x_santodomingo = radius_earth * cos(lat_santodomingo_rad) * cos(lon_santodomingo_rad);
+y_santodomingo = radius_earth * cos(lat_santodomingo_rad) * sin(lon_santodomingo_rad);
+z_santodomingo = radius_earth * sin(lat_santodomingo_rad);
 
-% Uribia
-x_uribia = radius_earth * cos(lat_uribia_rad) * cos(lon_uribia_rad);
-y_uribia = radius_earth * cos(lat_uribia_rad) * sin(lon_uribia_rad);
-z_uribia = radius_earth * sin(lat_uribia_rad);
+% Pedernales
+x_pedernales = radius_earth * cos(lat_pedernales_rad) * cos(lon_pedernales_rad);
+y_pedernales = radius_earth * cos(lat_pedernales_rad) * sin(lon_pedernales_rad);
+z_pedernales = radius_earth * sin(lat_pedernales_rad);
 
 % Satellite
 x_satellite = (radius_earth + altitude_satellite) * cos(lat_satellite_rad) * cos(lon_satellite_rad);
@@ -54,21 +54,21 @@ z_orbit = zeros(size(theta));  % Assuming orbit in the equatorial plane
 plot3(x_orbit, y_orbit, z_orbit, 'k--', 'LineWidth', 1.5);
 
 % Plot communication links (upload and download)
-plot3([x_bogota, x_satellite], [y_bogota, y_satellite], [z_bogota, z_satellite], 'r-', 'LineWidth', 2); % Upload
-plot3([x_satellite, x_uribia], [y_satellite, y_uribia], [z_satellite, z_uribia], 'b-', 'LineWidth', 2); % Download
+plot3([x_santodomingo, x_satellite], [y_santodomingo, y_satellite], [z_santodomingo, z_satellite], 'r-', 'LineWidth', 2); % Upload
+plot3([x_satellite, x_pedernales], [y_satellite, y_pedernales], [z_satellite, z_pedernales], 'b-', 'LineWidth', 2); % Download
 
 % Plot positions
-plot3(x_bogota, y_bogota, z_bogota, 'go', 'MarkerFaceColor', 'g');  % Bogotá (upload link)
-plot3(x_uribia, y_uribia, z_uribia, 'mo', 'MarkerFaceColor', 'm');  % Uribia (download link)
+plot3(x_santodomingo, y_santodomingo, z_santodomingo, 'go', 'MarkerFaceColor', 'g');  % Santo Domingo (upload link)
+plot3(x_pedernales, y_pedernales, z_pedernales, 'mo', 'MarkerFaceColor', 'm');  % Pedernales (download link)
 plot3(x_satellite, y_satellite, z_satellite, 'ko', 'MarkerFaceColor', 'k');  % Satellite
 
 % Labels and configuration
-title('Satellite in Orbit over Colombia with Communication Links');
+title('Satellite in Orbit over the Dominican Republic with Communication Links');
 xlabel('X (km)');
 ylabel('Y (km)');
 zlabel('Z (km)');
 legend('Earth (Silhouette)', 'Satellite Orbit', 'Upload Link', 'Download Link', ...
-       'Bogotá (Base Station)', 'Uribia (Download Station)', 'Satellite');
+       'Santo Domingo (Base Station)', 'Pedernales (Download Station)', 'Satellite');
 grid on;
 axis equal;
 hold off;
