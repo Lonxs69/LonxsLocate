@@ -1,3 +1,4 @@
+* text=auto eol=lf
 *.m linguist-language=MATLAB
 *.pkt binary
 *.webm binary
