@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0] - 2026-10-22
+### Agregado
+- Comando `barrido`: evalúa 90 diseños de constelación en paralelo y devuelve el mínimo que cubre ≥ 99.9 % en todas las estaciones (64 satélites a 1 200 km frente a los 200 del diseño inicial).
+- Ejecución en AWS con `barrido --aws`: Step Functions (Map) + Lambda + S3 + Glue + Athena, en Terraform.
+- Despliegue desde GitHub Actions por OIDC, sin llaves guardadas.
+- CI valida formato y sintaxis de Terraform.
+- Figuras propias generadas desde los datos (`make imagenes`) y banner del proyecto.
+
+### Cambiado
+- El proyecto se llama ahora **LonxsLocate**.
+- README con títulos centrados y sección sobre el papel de AWS.
+
 ## [1.3.0] - 2026-10-22
 ### Cambiado
 - Las 15 estaciones terrenas ahora son de República Dominicana: 8 uplink (Santo Domingo, Santiago, La Romana, Puerto Plata, San Juan, Barahona, Higüey, San Francisco de Macorís) y 7 downlink rurales (Pedernales, Comendador, Dajabón, Jimaní, Neiba, Sabana Grande de Boyá, Constanza).

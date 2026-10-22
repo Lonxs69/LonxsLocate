@@ -11,6 +11,9 @@ flowchart LR
     CLI --> C[cobertura]
     SIM --> V[Visor 3D en tiempo real]
     PKT[Cisco Packet Tracer] --> RED[Red de acceso rural]
+    CLI --> B[barrido]
+    B -->|local| PP[ProcessPool]
+    B -->|--aws| SFN[Step Functions → Lambda → S3 → Athena]
 ```
 
 ## Capas
@@ -22,6 +25,7 @@ flowchart LR
 | Enlace | MATLAB + `lonxslocate enlace` | Geometría, latencia y pérdidas de cada tramo |
 | Señal | `ModulationofPackets.m` | Modulación AM de subida y bajada, y transmisión de paquetes con latencia |
 | Red de acceso | Cisco Packet Tracer | Última milla: estación base → AP → antena 3G/4G → usuarios |
+| Optimización | `lonxslocate barrido` + AWS | Probar decenas o cientos de diseños en paralelo y quedarse con el más barato que cumple la cobertura |
 
 ## Módulos de Python
 
@@ -30,10 +34,16 @@ lonxslocate/
 ├── orbita.py      # Kepler, posición ECI, constelaciones Walker y GEO
 ├── enlace.py      # estaciones, elevación, distancia, latencia, FSPL, huella
 ├── cobertura.py   # simulación temporal de visibilidad por estación
-└── cli.py         # comandos estaciones / enlace / huella / cobertura
+├── barrido.py     # grilla de diseños, evaluación y ranking
+├── nube.py        # lanza el barrido en AWS y lee el ranking de Athena (boto3 opcional)
+└── cli.py         # comandos estaciones / enlace / huella / cobertura / barrido
 ```
 
-Solo usa la librería estándar, así que funciona en cualquier Python ≥ 3.9 sin instalar nada.
+El núcleo solo usa la librería estándar, así que funciona en cualquier Python ≥ 3.9 sin instalar nada. Ese mismo código es el que corre dentro de AWS Lambda.
+
+## En la nube
+
+`evaluar_configuracion()` es una función pura: recibe un diseño y devuelve sus métricas. Eso permite ejecutarla igual en un proceso local o en una Lambda. Step Functions reparte la grilla con un estado `Map`, cada Lambda escribe una línea JSON en S3 bajo `resultados/barrido=<id>/` y, al terminar, Step Functions ejecuta en Athena la consulta que ordena los diseños válidos por cantidad de satélites. Detalles y seguridad en [`aws/README.md`](../aws/README.md).
 
 ## Fuente única de datos
 
