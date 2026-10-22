@@ -1,16 +1,16 @@
 nombre,tipo,region,latitud,longitud,altitud_m
-Bogotá,uplink,Cundinamarca,4.7110,-74.0721,2640
-Riohacha,uplink,La Guajira,11.535458,-72.922254,2
-Leticia,uplink,Amazonas,-4.2150,-69.9406,96
-Mitú,uplink,Vaupés,1.1983,-70.1730,180
-San Andrés,uplink,San Andrés y Providencia,12.5847,-81.7006,5
-Pasto,uplink,Nariño,1.2136,-77.2811,2527
-Villavicencio,uplink,Meta,4.1420,-73.6266,467
-Quibdó,uplink,Chocó,5.6919,-76.6584,43
-Uribia,downlink,La Guajira,11.709312,-72.261161,10
-Amazonas rural,downlink,Amazonas,-3.7534,-70.2563,90
-Chocó rural,downlink,Chocó,5.3000,-76.8000,50
-Vaupés rural,downlink,Vaupés,-0.8607,-70.9300,190
-Putumayo rural,downlink,Putumayo,-1.1520,-76.6500,250
-Vichada rural,downlink,Vichada,4.7087,-69.7591,100
-Guainía rural,downlink,Guainía,2.5701,-68.3000,100
+Santo Domingo,uplink,Distrito Nacional,18.4861,-69.9312,14
+Santiago,uplink,Santiago,19.4517,-70.6970,178
+La Romana,uplink,La Romana,18.4273,-68.9728,10
+Puerto Plata,uplink,Puerto Plata,19.7934,-70.6884,5
+San Juan de la Maguana,uplink,San Juan,18.8058,-71.2290,400
+Barahona,uplink,Barahona,18.2085,-71.1008,10
+Higüey,uplink,La Altagracia,18.6150,-68.7076,100
+San Francisco de Macorís,uplink,Duarte,19.3008,-70.2526,90
+Pedernales,downlink,Pedernales,18.0384,-71.7440,20
+Comendador,downlink,Elías Piña,18.8767,-71.7072,430
+Dajabón,downlink,Dajabón,19.5486,-71.7083,50
+Jimaní,downlink,Independencia,18.4917,-71.8500,40
+Neiba,downlink,Bahoruco,18.4810,-71.4189,10
+Sabana Grande de Boyá,downlink,Monte Plata,18.9450,-69.7930,100
+Constanza,downlink,La Vega,18.9095,-70.7448,1200
