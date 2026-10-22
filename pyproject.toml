@@ -25,7 +25,7 @@ classifiers = [
 lonxslocate = "lonxslocate.cli:main"
 
 [project.urls]
-Repositorio = "https://github.com/Lonxs69/lonxsLocate"
+Repositorio = "https://github.com/Lonxs69/LonxsLocate"
 
 [tool.setuptools]
 packages = ["lonxslocate"]

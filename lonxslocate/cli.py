@@ -178,7 +178,7 @@ def construir_parser() -> argparse.ArgumentParser:
         prog="lonxslocate",
         description="Diseño y análisis de redes satelitales LEO/GEO para República Dominicana.",
     )
-    p.add_argument("--version", action="version", version=f"lonxsLocate {__version__}")
+    p.add_argument("--version", action="version", version=f"LonxsLocate {__version__}")
     p.add_argument(
         "--estaciones",
         metavar="CSV",

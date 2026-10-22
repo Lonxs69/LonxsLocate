@@ -1,6 +1,6 @@
 # Cómo contribuir
 
-¡Gracias por el interés en lonxsLocate!
+¡Gracias por el interés en LonxsLocate!
 
 1. Haz un fork y crea una rama: `git checkout -b mejora/nombre-corto`.
 2. Si agregas una estación, edítala solo en `data/estaciones.csv`; MATLAB y Python leen ese mismo archivo.
