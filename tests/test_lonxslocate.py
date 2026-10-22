@@ -1,5 +1,8 @@
+import csv
 import math
+import tempfile
 import unittest
+from pathlib import Path
 
 from lonxslocate.cli import main
 from lonxslocate.cobertura import simular_cobertura
@@ -101,6 +104,18 @@ class TestCLI(unittest.TestCase):
     def test_comandos(self):
         for argv in (["estaciones"], ["enlace"], ["huella", "550"]):
             self.assertEqual(main(argv), 0)
+
+    def test_exporta_csv(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            salida = Path(tmp) / "cobertura.csv"
+            argv = ["cobertura", "--horas", "1", "--paso", "300", "--tipo", "downlink",
+                    "--csv", str(salida)]
+            self.assertEqual(main(argv), 0)
+            with open(salida, encoding="utf-8") as f:
+                filas = list(csv.DictReader(f))
+        self.assertEqual(len(filas), 7)
+        self.assertEqual(filas[0]["estacion"], "Pedernales")
+        self.assertTrue(0 <= float(filas[0]["cobertura_pct"]) <= 100)
 
 
 if __name__ == "__main__":
