@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lonxslocate"
+version = "1.2.0"
+description = "Diseño y análisis de redes satelitales LEO/GEO para conectar las zonas rurales de Colombia"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Junior De León" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["satélites", "LEO", "GEO", "telecomunicaciones", "simulación", "colombia"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "Topic :: System :: Networking",
+]
+
+[project.scripts]
+lonxslocate = "lonxslocate.cli:main"
+
+[project.urls]
+Repositorio = "https://github.com/Lonxs69/lonxsLocate"
+
+[tool.setuptools]
+packages = ["lonxslocate"]
+
+[tool.ruff]
+line-length = 100
