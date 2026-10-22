@@ -9,6 +9,6 @@
    python -m unittest discover -s tests -v
    ```
 4. Mantén el código sin dependencias externas (solo librería estándar de Python).
-5. Escribe los mensajes de commit en español y en presente: `agrega estación de Inírida`.
+5. Escribe los mensajes de commit en español y en presente: `agrega estación de Montecristi`.
 
 Para proponer una región sin programar, abre un issue con la plantilla **Proponer una región**.
