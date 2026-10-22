@@ -8,3 +8,4 @@ dist/
 *.asv
 *.mex*
 slprj/
+cobertura.csv
