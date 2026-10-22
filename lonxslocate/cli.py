@@ -8,6 +8,7 @@ import csv
 from . import __version__
 from .cobertura import simular_cobertura
 from .enlace import (
+    RUTA_ESTACIONES,
     buscar_estacion,
     cargar_estaciones,
     geometria,
@@ -31,15 +32,16 @@ def _tabla(encabezados: list[str], filas: list[list]) -> str:
 def cmd_estaciones(args) -> None:
     filas = [
         [e.nombre, e.tipo, e.region, f"{e.latitud:.4f}", f"{e.longitud:.4f}", int(e.altitud_m)]
-        for e in cargar_estaciones()
+        for e in cargar_estaciones(args.estaciones)
         if args.tipo in (None, e.tipo)
     ]
     print(_tabla(["Estación", "Tipo", "Región", "Lat", "Lon", "Alt (m)"], filas))
 
 
 def cmd_enlace(args) -> None:
-    origen = buscar_estacion(args.origen)
-    destino = buscar_estacion(args.destino)
+    estaciones = cargar_estaciones(args.estaciones)
+    origen = buscar_estacion(args.origen, estaciones)
+    destino = buscar_estacion(args.destino, estaciones)
     pos_sat = satelite_sobre(args.sat_lat, args.sat_lon, args.altitud)
 
     el_up, d_up = geometria(origen.posicion_eci(rotacion=False), pos_sat)
@@ -86,7 +88,7 @@ def cmd_huella(args) -> None:
 
 
 def cmd_cobertura(args) -> None:
-    estaciones = [e for e in cargar_estaciones() if args.tipo in (None, e.tipo)]
+    estaciones = [e for e in cargar_estaciones(args.estaciones) if args.tipo in (None, e.tipo)]
     sats = constelacion_walker(
         args.planos,
         args.sats,
@@ -135,6 +137,12 @@ def construir_parser() -> argparse.ArgumentParser:
         description="Diseño y análisis de redes satelitales LEO/GEO para República Dominicana.",
     )
     p.add_argument("--version", action="version", version=f"lonxsLocate {__version__}")
+    p.add_argument(
+        "--estaciones",
+        metavar="CSV",
+        default=RUTA_ESTACIONES,
+        help="archivo de estaciones a usar (por defecto data/estaciones.csv)",
+    )
     sub = p.add_subparsers(dest="comando", required=True)
 
     s = sub.add_parser("estaciones", help="lista las estaciones terrenas")
