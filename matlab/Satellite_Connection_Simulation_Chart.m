@@ -63,12 +63,12 @@ plot3(x_pedernales, y_pedernales, z_pedernales, 'mo', 'MarkerFaceColor', 'm');  
 plot3(x_satellite, y_satellite, z_satellite, 'ko', 'MarkerFaceColor', 'k');  % Satellite
 
 % Labels and configuration
-title('Satellite in Orbit over the Dominican Republic with Communication Links');
+title('Satélite en órbita sobre República Dominicana con enlaces de comunicación');
 xlabel('X (km)');
 ylabel('Y (km)');
 zlabel('Z (km)');
-legend('Earth (Silhouette)', 'Satellite Orbit', 'Upload Link', 'Download Link', ...
-       'Santo Domingo (Base Station)', 'Pedernales (Download Station)', 'Satellite');
+legend('Tierra (silueta)', 'Órbita del satélite', 'Enlace de subida', 'Enlace de bajada', ...
+       'Santo Domingo (estación base)', 'Pedernales (estación de bajada)', 'Satélite');
 grid on;
 axis equal;
 hold off;
