@@ -9,3 +9,18 @@ dist/
 *.mex*
 slprj/
 cobertura.csv
+
+# Terraform: nunca subir estado, variables locales ni artefactos
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+aws/terraform/.build/
+
+# Credenciales
+.env
+.env.*
+*.pem
+barrido.json
