@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 
 from . import __version__
 from .cobertura import simular_cobertura
@@ -118,6 +119,15 @@ def cmd_cobertura(args) -> None:
     peor = min(resultados, key=lambda r: r.porcentaje)
     print(f"\nPeor estación: {peor.estacion} ({peor.porcentaje:.1f} %)")
 
+    if args.csv:
+        with open(args.csv, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["estacion", "cobertura_pct", "hueco_maximo_min", "visibles_promedio"])
+            for r in resultados:
+                w.writerow([r.estacion, round(r.porcentaje, 2), r.hueco_maximo_min,
+                            round(r.visibles_promedio, 2)])
+        print(f"Resultados guardados en {args.csv}")
+
 
 def construir_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -157,6 +167,7 @@ def construir_parser() -> argparse.ArgumentParser:
     s.add_argument("--geo", action="store_true", help="agrega un satélite GEO de respaldo sobre 70° O")
     s.add_argument("--no-escalonada", action="store_true")
     s.add_argument("--sin-rotacion", action="store_true", help="Tierra fija, como en MATLAB")
+    s.add_argument("--csv", metavar="ARCHIVO", help="exporta los resultados a CSV")
     s.set_defaults(func=cmd_cobertura)
     return p
 
