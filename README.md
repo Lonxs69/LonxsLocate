@@ -124,18 +124,18 @@ Los videos completos están en [`simulaciones/universe-sandbox/`](simulaciones/u
 
 | Script | Qué hace |
 |---|---|
-| [`Satellite_Connection_Simulation_Chart.m`](matlab/Satellite_Connection_Simulation_Chart.m) | Enlace Bogotá (estación base) → satélite LEO → Uribia (bajada) en 3D |
+| [`Satellite_Connection_Simulation_Chart.m`](matlab/Satellite_Connection_Simulation_Chart.m) | Enlace Santo Domingo (estación base) → satélite LEO → Pedernales (bajada) en 3D |
 | [`ModulationofPackets.m`](matlab/ModulationofPackets.m) | Modulación AM de subida y bajada y transmisión de paquetes con latencia |
 | [`Non_Step_Satellite_Network.m`](matlab/Non_Step_Satellite_Network.m) | Red LEO sin desfase entre satélites + GEO de respaldo |
 | [`FullSatelliteSimulation.m`](matlab/FullSatelliteSimulation.m) | Simulación completa: 200 LEO escalonados + GEO + 15 estaciones |
 | [`cargar_estaciones.m`](matlab/cargar_estaciones.m) | Carga las estaciones desde `data/estaciones.csv` |
 
-#### Enlace Bogotá → LEO → Uribia
+#### Enlace Santo Domingo → LEO → Pedernales
 
-Uribia es una de las zonas de Colombia con más necesidad de conectividad. El script dibuja la Tierra, la órbita y los dos tramos del enlace.
+Pedernales, en la frontera sur, es una de las provincias del país con más necesidad de conectividad. El script dibuja la Tierra, la órbita y los dos tramos del enlace.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1387af3f-a5ce-454a-8342-5c14b7e03192" alt="Enlace Bogotá - satélite - Uribia" width="600">
+  <img src="https://github.com/user-attachments/assets/1387af3f-a5ce-454a-8342-5c14b7e03192" alt="Enlace estación base - satélite - estación de bajada" width="600">
 </p>
 
 #### Modulación y transmisión de paquetes
@@ -156,11 +156,11 @@ Todos los satélites LEO arrancan sin desfase y un GEO garantiza presencia const
 
 #### Simulación completa con escalonamiento
 
-Ahora sí con desfase entre planos, para que siempre haya al menos un satélite LEO sobre Colombia. El número de órbitas y de satélites por órbita es configurable.
+Ahora sí con desfase entre planos, para que siempre haya al menos un satélite LEO sobre el país. El número de órbitas y de satélites por órbita es configurable, y las estaciones se cargan desde `data/estaciones.csv`.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/324b96ef-8047-4930-9cb3-2d715bd12768" alt="Estaciones en Colombia" width="600"><br>
-  <sub>Estaciones terrenas en Colombia</sub>
+  <img src="https://github.com/user-attachments/assets/324b96ef-8047-4930-9cb3-2d715bd12768" alt="Estaciones terrenas" width="600"><br>
+  <sub>Estaciones terrenas en el visor de MATLAB</sub>
 </p>
 
 <p align="center">
@@ -170,7 +170,7 @@ Ahora sí con desfase entre planos, para que siempre haya al menos un satélite 
 
 ### 3. Cisco Packet Tracer: red de acceso
 
-Como Packet Tracer no tiene satélites, el satélite se representa con una **tablet**. Esta se conecta a una **estación base** con un **access point** para la subida, y una **antena 3G/4G** distribuye la bajada. La red da servicio a **Albania**, **Barrancas** y **Uribia** en La Guajira, y el mismo esquema se puede replicar en cualquier región.
+Como Packet Tracer no tiene satélites, el satélite se representa con una **tablet**. Esta se conecta a una **estación base** con un **access point** para la subida, y una **antena 3G/4G** distribuye la bajada. La red da servicio a tres comunidades rurales, y el mismo esquema se puede replicar en cualquier provincia.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3ae0e366-4806-4761-a38d-ffb080b816fa" alt="Simulación en Cisco Packet Tracer" width="600">
