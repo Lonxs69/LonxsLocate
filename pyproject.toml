@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "lonxslocate"
 version = "1.2.0"
-description = "Diseño y análisis de redes satelitales LEO/GEO para conectar las zonas rurales de Colombia"
+description = "Diseño y análisis de redes satelitales LEO/GEO para conectar las zonas rurales de República Dominicana"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "Junior De León" }]
 requires-python = ">=3.9"
 dependencies = []
-keywords = ["satélites", "LEO", "GEO", "telecomunicaciones", "simulación", "colombia"]
+keywords = ["satélites", "LEO", "GEO", "telecomunicaciones", "simulación", "república dominicana"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Topic :: Scientific/Engineering :: Astronomy",
