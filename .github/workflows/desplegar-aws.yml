@@ -1,0 +1,57 @@
+name: Desplegar en AWS
+
+# Actualiza el código de la Lambda y, opcionalmente, lanza un barrido.
+# La infraestructura se crea con Terraform (ver aws/README.md).
+# Credenciales: OIDC, sin llaves guardadas en el repositorio.
+
+on:
+  workflow_dispatch:
+    inputs:
+      lanzar_barrido:
+        description: "Lanzar un barrido completo después de desplegar"
+        type: boolean
+        default: false
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: desplegar-aws
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    environment: aws
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Tests antes de desplegar
+        run: python -m unittest discover -s tests
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Empaquetar Lambda
+        run: |
+          mkdir -p build && cp aws/lambda/handler.py build/
+          cp -r lonxslocate build/ && mkdir -p build/data && cp data/estaciones.csv build/data/
+          (cd build && zip -qr ../lambda.zip .)
+
+      - name: Actualizar código
+        run: |
+          aws lambda update-function-code --function-name "${{ vars.LAMBDA_NAME }}" \
+            --zip-file fileb://lambda.zip --publish > /dev/null
+          aws lambda wait function-updated --function-name "${{ vars.LAMBDA_NAME }}"
+
+      - name: Lanzar barrido
+        if: ${{ inputs.lanzar_barrido }}
+        run: |
+          pip install -q boto3
+          python -m lonxslocate barrido --aws "${{ vars.STATE_MACHINE_ARN }}"

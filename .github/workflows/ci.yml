@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Lint
-        run: pipx run ruff check lonxslocate tests
+        run: pipx run ruff check lonxslocate tests aws
       - name: Tests
         run: python -m unittest discover -s tests -v
       - name: Smoke test de la CLI
@@ -25,3 +28,18 @@ jobs:
           python -m lonxslocate enlace
           python -m lonxslocate huella
           python -m lonxslocate cobertura --horas 2 --paso 120 --tipo downlink
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aws/terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Formato
+        run: terraform fmt -check -recursive
+      - name: Validación
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
