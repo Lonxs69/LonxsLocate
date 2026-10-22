@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
+import time
 
 from . import __version__
+from .barrido import barrido_local, generar_configuraciones, mejores
 from .cobertura import simular_cobertura
 from .enlace import (
     RUTA_ESTACIONES,
@@ -131,6 +134,45 @@ def cmd_cobertura(args) -> None:
         print(f"Resultados guardados en {args.csv}")
 
 
+def cmd_barrido(args) -> None:
+    configs = generar_configuraciones(paso_s=args.paso)
+    if args.aws:
+        from .nube import barrido_aws
+
+        inicio = time.perf_counter()
+        ranking = barrido_aws(args.aws, configs)
+        print(f"Listo en {time.perf_counter() - inicio:.0f} s (ranking calculado por Athena)\n")
+        print(_tabla(list(ranking[0]), [list(r.values()) for r in ranking]) if ranking
+              else "Ninguna configuración alcanzó el objetivo.")
+        return
+
+    print(f"Evaluando {len(configs)} configuraciones en local (paso {args.paso:g} s)...")
+    inicio = time.perf_counter()
+    resultados = barrido_local(configs, args.procesos)
+    print(f"Listo en {time.perf_counter() - inicio:.0f} s\n")
+
+    top = mejores(resultados, args.objetivo, args.top)
+    if not top:
+        print(f"Ninguna configuración alcanza {args.objetivo:g} % en todas las estaciones.")
+    else:
+        print(f"Constelaciones más baratas con cobertura ≥ {args.objetivo:g} % en todas las estaciones:\n")
+        print(
+            _tabla(
+                ["Planos × sats", "Total", "Altitud", "Cobertura mín.", "Visibles (prom.)"],
+                [
+                    [f"{r['planos']} × {r['sats_por_plano']}", r["total_satelites"],
+                     f"{r['altitud_km']:g} km", f"{r['cobertura_min_pct']:.1f} %",
+                     f"{r['visibles_promedio']:.1f}"]
+                    for r in top
+                ],
+            )
+        )
+    if args.json:
+        with open(args.json, "w", encoding="utf-8") as f:
+            json.dump(resultados, f, ensure_ascii=False, indent=1)
+        print(f"\nResultados completos guardados en {args.json}")
+
+
 def construir_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="lonxslocate",
@@ -177,6 +219,16 @@ def construir_parser() -> argparse.ArgumentParser:
     s.add_argument("--sin-rotacion", action="store_true", help="Tierra fija, como en MATLAB")
     s.add_argument("--csv", metavar="ARCHIVO", help="exporta los resultados a CSV")
     s.set_defaults(func=cmd_cobertura)
+
+    s = sub.add_parser("barrido", help="busca la constelación más barata que cubre todo el país")
+    s.add_argument("--objetivo", type=float, default=99.9, help="cobertura mínima en %%")
+    s.add_argument("--paso", type=float, default=120, help="segundos")
+    s.add_argument("--procesos", type=int, help="procesos en paralelo (por defecto, todos los núcleos)")
+    s.add_argument("--top", type=int, default=5)
+    s.add_argument("--json", metavar="ARCHIVO", help="guarda todos los resultados en JSON")
+    s.add_argument("--aws", metavar="STATE_MACHINE_ARN",
+                   help="ejecuta el barrido en AWS (Step Functions + Lambda + Athena)")
+    s.set_defaults(func=cmd_barrido)
     return p
 
 
