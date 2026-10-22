@@ -45,7 +45,7 @@ Un satélite solo cuenta como visible si la elevación es ≥ 10° (valor config
 latencia (ms) = distancia (km) / c · 1000      con c = 299 792.458 km/s
 ```
 
-Bogotá → LEO 600 km → Uribia da ≈ 5 ms. El mismo enlace por GEO da ≈ 240 ms, casi 45 veces más.
+Santo Domingo → LEO 600 km → Pedernales da ≈ 4 ms. El mismo enlace por GEO da ≈ 241 ms, unas 60 veces más.
 
 ## Pérdida en espacio libre (FSPL)
 
@@ -64,7 +64,7 @@ radio = R · λ
 
 ## Constelación Walker
 
-`planos × satélites por plano`, con los planos repartidos en 360° de RAAN. En la versión **escalonada** cada plano se desfasa `360°·F·p / T` respecto al anterior. Así los huecos de un plano los cubre el siguiente, y es la configuración que logra cobertura continua sobre Colombia. La **no escalonada** (todos los planos en fase) deja huecos de más de 40 minutos. Se puede comprobar con:
+`planos × satélites por plano`, con los planos repartidos en 360° de RAAN. En la versión **escalonada** cada plano se desfasa `360°·F·p / T` respecto al anterior. Así los huecos de un plano los cubre el siguiente, y es la configuración que logra cobertura continua sobre República Dominicana. Una red **no escalonada** de 10 satélites (todos los planos en fase) solo cubre ~14 % del tiempo, con huecos de hasta 91 minutos. Se puede comprobar con:
 
 ```bash
 python -m lonxslocate cobertura --planos 10 --sats 1 --no-escalonada
