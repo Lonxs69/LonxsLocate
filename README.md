@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0b1d3a,100:1f6feb&height=200&section=header&text=lonxsLocate&fontSize=60&fontColor=ffffff&desc=Redes%20satelitales%20LEO%2FGEO%20para%20conectar%20la%20Colombia%20rural&descSize=16&descAlignY=72" alt="lonxsLocate" width="100%">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0b1d3a,100:1f6feb&height=200&section=header&text=lonxsLocate&fontSize=60&fontColor=ffffff&desc=Redes%20satelitales%20LEO%2FGEO%20para%20conectar%20la%20RD%20rural&descSize=16&descAlignY=72" alt="lonxsLocate" width="100%">
 
 ![MATLAB](https://img.shields.io/badge/MATLAB-Satellite%20Toolbox-e16737?style=for-the-badge&logo=mathworks&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)
@@ -18,15 +18,15 @@
 
 ## 🌎 Contexto
 
-En La Guajira, el Amazonas, el Vaupés o el Chocó hay comunidades enteras sin una conexión estable a internet. Llevar fibra a esas zonas es caro y lento, y en algunos casos imposible.
+En la zona fronteriza (Pedernales, Elías Piña, Dajabón, Independencia), en Bahoruco, en la parte rural de Monte Plata o en las montañas de Constanza hay comunidades que todavía no tienen una conexión estable a internet. Llevar fibra a esos lugares es caro y lento, y en algunos casos imposible.
 
-**lonxsLocate** diseña y analiza una red satelital que lleve conectividad a esas regiones. Combina:
+**lonxsLocate** diseña y analiza una red satelital que lleve conectividad a esas regiones de República Dominicana. Combina:
 
 - 🛰️ **Constelación LEO** (órbita baja, ~600 km): baja latencia, pero cada satélite pasa rápido sobre el territorio.
 - 🌐 **Satélite GEO** (36 000 km): siempre visible y sirve de respaldo, aunque con latencia alta.
-- 📡 **Estaciones terrenas**: 8 de subida (uplink) en ciudades con infraestructura y 7 puntos de bajada (downlink) en zonas rurales.
+- 📡 **Estaciones terrenas**: 8 de subida (uplink) en ciudades con infraestructura (Santo Domingo, Santiago, La Romana, Puerto Plata, San Juan, Barahona, Higüey y San Francisco de Macorís) y 7 puntos de bajada (downlink) en zonas rurales.
 
-La pregunta que responde el proyecto es: **¿cuántos satélites, en qué órbitas y con qué desfase hacen falta para que ninguna región de Colombia se quede sin servicio?**
+La pregunta que responde el proyecto es: **¿cuántos satélites, en qué órbitas y con qué desfase hacen falta para que ninguna comunidad del país se quede sin servicio?**
 
 ## 📊 Resultados
 
