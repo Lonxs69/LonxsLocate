@@ -94,7 +94,7 @@ def cmd_cobertura(args) -> None:
         escalonada=not args.no_escalonada,
     )
     if args.geo:
-        sats.append(satelite_geo(longitud_deg=-74.0))
+        sats.append(satelite_geo(longitud_deg=-70.0))
 
     modo = "no escalonada" if args.no_escalonada else "escalonada"
     print(
@@ -122,7 +122,7 @@ def cmd_cobertura(args) -> None:
 def construir_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="lonxslocate",
-        description="Diseño y análisis de redes satelitales LEO/GEO para Colombia.",
+        description="Diseño y análisis de redes satelitales LEO/GEO para República Dominicana.",
     )
     p.add_argument("--version", action="version", version=f"lonxsLocate {__version__}")
     sub = p.add_subparsers(dest="comando", required=True)
@@ -132,11 +132,11 @@ def construir_parser() -> argparse.ArgumentParser:
     s.set_defaults(func=cmd_estaciones)
 
     s = sub.add_parser("enlace", help="calcula el enlace estación → satélite → estación")
-    s.add_argument("--origen", default="Bogotá")
-    s.add_argument("--destino", default="Uribia")
+    s.add_argument("--origen", default="Santo Domingo")
+    s.add_argument("--destino", default="Pedernales")
     s.add_argument("--altitud", type=float, default=600, help="altitud del satélite en km")
-    s.add_argument("--sat-lat", type=float, default=5.0)
-    s.add_argument("--sat-lon", type=float, default=-74.0)
+    s.add_argument("--sat-lat", type=float, default=18.7)
+    s.add_argument("--sat-lon", type=float, default=-70.5)
     s.add_argument("--frecuencia", type=float, default=12_000, help="MHz (por defecto banda Ku)")
     s.set_defaults(func=cmd_enlace)
 
@@ -154,7 +154,7 @@ def construir_parser() -> argparse.ArgumentParser:
     s.add_argument("--paso", type=float, default=60, help="segundos")
     s.add_argument("--elevacion", type=float, default=10)
     s.add_argument("--tipo", choices=["uplink", "downlink"])
-    s.add_argument("--geo", action="store_true", help="agrega un satélite GEO de respaldo")
+    s.add_argument("--geo", action="store_true", help="agrega un satélite GEO de respaldo sobre 70° O")
     s.add_argument("--no-escalonada", action="store_true")
     s.add_argument("--sin-rotacion", action="store_true", help="Tierra fija, como en MATLAB")
     s.set_defaults(func=cmd_cobertura)
