@@ -45,7 +45,7 @@ Barrido de 90 diseños (6 a 20 planos × 4 a 12 satélites por plano × 3 altitu
 | 800 km | 10 planos × 10 | 100 | **100 %** | 2.7 ms |
 | 1 200 km | 8 planos × 8 | **64** | **100 %** | 4.0 ms |
 
-> El diseño inicial usaba 200 satélites. El barrido muestra que con **64 satélites a 1 200 km** se mantiene el 100 % de cobertura: **68 % menos satélites**, a cambio de ~2 ms más de latencia. Se reproduce con `python -m lonxslocate barrido`, o en AWS con `--aws`.
+> El diseño inicial usaba 200 satélites. Según el barrido, **64 satélites a 1 200 km** bastan para mantener visibilidad continua (≥ 10° de elevación) sobre las 15 estaciones: **68 % menos satélites**. El costo es ~2 ms más de latencia y ~5.6 dB más de pérdida de trayecto. El modelo mide cobertura, no capacidad, así que el siguiente paso es el presupuesto de enlace del roadmap. Se reproduce con `python -m lonxslocate barrido`.
 
 <h3 align="center">Enlace Santo Domingo → satélite → Pedernales</h3>
 
