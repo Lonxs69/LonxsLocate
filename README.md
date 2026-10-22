@@ -100,7 +100,7 @@ Opción global: `--estaciones otro.csv` para analizar cualquier otro país o reg
 
 </details>
 
-Atajos con `make`: `make test`, `make demo`, `make cobertura`.
+Atajos con `make`: `make test`, `make demo`, `make cobertura` y `make imagenes` (regenera las figuras del README a partir de los datos).
 
 ## 🛰️ Simulaciones
 
@@ -135,7 +135,7 @@ Los videos completos están en [`simulaciones/universe-sandbox/`](simulaciones/u
 Pedernales, en la frontera sur, es una de las provincias del país con más necesidad de conectividad. El script dibuja la Tierra, la órbita y los dos tramos del enlace.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1387af3f-a5ce-454a-8342-5c14b7e03192" alt="Enlace estación base - satélite - estación de bajada" width="600">
+  <img src="docs/img/enlace-santo-domingo-pedernales.png" alt="Enlace Santo Domingo - satélite LEO - Pedernales" width="600">
 </p>
 
 #### Modulación y transmisión de paquetes
@@ -159,8 +159,8 @@ Todos los satélites LEO arrancan sin desfase y un GEO garantiza presencia const
 Ahora sí con desfase entre planos, para que siempre haya al menos un satélite LEO sobre el país. El número de órbitas y de satélites por órbita es configurable, y las estaciones se cargan desde `data/estaciones.csv`.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/324b96ef-8047-4930-9cb3-2d715bd12768" alt="Estaciones terrenas" width="600"><br>
-  <sub>Estaciones terrenas en el visor de MATLAB</sub>
+  <img src="docs/img/estaciones-rd.png" alt="Mapa de estaciones terrenas en República Dominicana" width="700"><br>
+  <sub>Las 15 estaciones terrenas y la traza de dos satélites de la constelación pasando sobre la isla</sub>
 </p>
 
 <p align="center">
@@ -170,10 +170,10 @@ Ahora sí con desfase entre planos, para que siempre haya al menos un satélite 
 
 ### 3. Cisco Packet Tracer: red de acceso
 
-Como Packet Tracer no tiene satélites, el satélite se representa con una **tablet**. Esta se conecta a una **estación base** con un **access point** para la subida, y una **antena 3G/4G** distribuye la bajada. La red da servicio a tres comunidades rurales, y el mismo esquema se puede replicar en cualquier provincia.
+Como Packet Tracer no tiene satélites, el satélite se representa con una **tablet**. Esta se conecta a una **estación base** con un **access point** para la subida, y una **antena 3G/4G** distribuye la bajada. La estación base está en **Barahona** y el downlink en **Pedernales**, que reparte el servicio a **Pedernales**, **Oviedo** y **Juancho**. El mismo esquema se puede replicar en cualquier provincia.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3ae0e366-4806-4761-a38d-ffb080b816fa" alt="Simulación en Cisco Packet Tracer" width="600">
+  <img src="docs/img/red-acceso-pedernales.png" alt="Topología de la red de acceso en Pedernales" width="800">
 </p>
 
 Archivo: [`simulaciones/cisco/SimulacionCisco.pkt`](simulaciones/cisco/SimulacionCisco.pkt)
@@ -188,7 +188,8 @@ lonxsLocate/
 ├── simulaciones/
 │   ├── cisco/            # Packet Tracer
 │   └── universe-sandbox/ # videos
-├── docs/                 # arquitectura y fundamentos
+├── docs/                 # arquitectura, fundamentos e imágenes
+├── scripts/              # generador de las imágenes del README
 └── tests/
 ```
 
