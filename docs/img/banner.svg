@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="LonxsLocate — Redes satelitales LEO/GEO para conectar la RD rural">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5c0a0a"/>
+      <stop offset="0.55" stop-color="#a51414"/>
+      <stop offset="1" stop-color="#d62a1e"/>
+    </linearGradient>
+    <radialGradient id="tierra" cx="0.5" cy="0" r="0.75">
+      <stop offset="0" stop-color="#ff6b5a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3d0606" stop-opacity="0.9"/>
+    </radialGradient>
+    <clipPath id="marco">
+      <rect width="1200" height="300" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#marco)">
+    <rect width="1200" height="300" fill="url(#fondo)"/>
+
+    <!-- estrellas -->
+    <g fill="#ffffff">
+      <circle cx="64" cy="38" r="1.2" opacity=".7"/><circle cx="158" cy="92" r="0.9" opacity=".5"/>
+      <circle cx="242" cy="30" r="1.4" opacity=".6"/><circle cx="318" cy="120" r="0.8" opacity=".4"/>
+      <circle cx="410" cy="52" r="1" opacity=".5"/><circle cx="872" cy="40" r="1.3" opacity=".6"/>
+      <circle cx="948" cy="104" r="0.9" opacity=".4"/><circle cx="1032" cy="28" r="1.1" opacity=".6"/>
+      <circle cx="1118" cy="86" r="1.4" opacity=".5"/><circle cx="1160" cy="150" r="0.8" opacity=".4"/>
+      <circle cx="96" cy="170" r="1" opacity=".4"/><circle cx="1086" cy="196" r="1" opacity=".35"/>
+    </g>
+
+    <!-- Tierra -->
+    <ellipse cx="600" cy="560" rx="760" ry="330" fill="url(#tierra)"/>
+    <ellipse cx="600" cy="560" rx="760" ry="330" fill="none" stroke="#ffb4a8" stroke-opacity=".45" stroke-width="2"/>
+
+    <!-- órbitas -->
+    <g fill="none" stroke="#ffffff" stroke-width="1.4">
+      <ellipse cx="600" cy="300" rx="640" ry="150" stroke-opacity=".22"/>
+      <ellipse cx="600" cy="300" rx="560" ry="205" stroke-opacity=".16" stroke-dasharray="6 8"/>
+      <ellipse cx="600" cy="300" rx="720" ry="245" stroke-opacity=".12"/>
+    </g>
+
+    <!-- satélites y enlaces -->
+    <g stroke="#ffffff" stroke-width="1.2" stroke-opacity=".55" stroke-dasharray="3 5">
+      <line x1="196" y1="214" x2="128" y2="268"/>
+      <line x1="1004" y1="214" x2="1080" y2="270"/>
+    </g>
+    <g fill="#ffffff">
+      <circle cx="196" cy="214" r="5"/>
+      <circle cx="1004" cy="214" r="5"/>
+      <circle cx="318" cy="103" r="3.5" opacity=".8"/>
+      <circle cx="884" cy="101" r="3.5" opacity=".8"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-opacity=".5">
+      <circle cx="196" cy="214" r="11"/>
+      <circle cx="1004" cy="214" r="11"/>
+    </g>
+
+    <!-- texto -->
+    <text x="600" y="150" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="82" font-weight="800" letter-spacing="1" fill="#ffffff">LonxsLocate</text>
+    <text x="600" y="198" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="24" font-weight="500" fill="#ffe4df">Redes satelitales LEO/GEO para conectar la República Dominicana rural</text>
+    <text x="600" y="238" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="3" fill="#ffffff" fill-opacity=".75">MATLAB · PYTHON · AWS · CISCO PACKET TRACER</text>
+  </g>
+</svg>
