@@ -1,0 +1,57 @@
+{
+  "Comment": "LonxsLocate: evalúa en paralelo cada configuración de constelación y rankea los resultados con Athena",
+  "StartAt": "EvaluarConfiguraciones",
+  "States": {
+    "EvaluarConfiguraciones": {
+      "Type": "Map",
+      "ItemsPath": "$.configuraciones",
+      "MaxConcurrency": ${concurrencia},
+      "ItemSelector": {
+        "id_barrido.$": "$.id_barrido",
+        "config.$": "$$.Map.Item.Value"
+      },
+      "ItemProcessor": {
+        "ProcessorConfig": { "Mode": "INLINE" },
+        "StartAt": "Evaluar",
+        "States": {
+          "Evaluar": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "${lambda_arn}",
+              "Payload.$": "$"
+            },
+            "ResultSelector": { "resultado.$": "$.Payload" },
+            "Retry": [
+              {
+                "ErrorEquals": ["Lambda.TooManyRequestsException", "Lambda.ServiceException", "Lambda.SdkClientException"],
+                "IntervalSeconds": 2,
+                "MaxAttempts": 6,
+                "BackoffRate": 2,
+                "JitterStrategy": "FULL"
+              }
+            ],
+            "End": true
+          }
+        }
+      },
+      "ResultPath": null,
+      "Next": "Rankear"
+    },
+    "Rankear": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
+      "Parameters": {
+        "WorkGroup": "${workgroup}",
+        "QueryExecutionContext": { "Database": "${base_datos}" },
+        "QueryString.$": "States.Format('SELECT planos, sats_por_plano, total_satelites, altitud_km, cobertura_min_pct, visibles_promedio FROM resultados WHERE barrido = \\'{}\\' AND cobertura_min_pct >= ${cobertura_objetivo} ORDER BY total_satelites, altitud_km, visibles_promedio DESC LIMIT 10', $.id_barrido)"
+      },
+      "ResultSelector": {
+        "query_id.$": "$.QueryExecution.QueryExecutionId",
+        "salida.$": "$.QueryExecution.ResultConfiguration.OutputLocation"
+      },
+      "ResultPath": "$.ranking",
+      "End": true
+    }
+  }
+}
