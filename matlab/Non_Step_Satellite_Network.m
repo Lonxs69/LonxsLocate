@@ -38,26 +38,26 @@ for i = 0:numLEOSatellites-1
 end
 
 % --- GROUND STATIONS ---
-% Ground station in Bogotá (main uplink)
-latitudeBogota = 4.7110;
-longitudeBogota = -74.0721;
-altitudeBogota = 0;
-gsBogota = groundStation(sc, "Name", "Bogota Station", ...
-    "Latitude", latitudeBogota, "Longitude", longitudeBogota, "Altitude", altitudeBogota);
+% Ground station in Santo Domingo (main uplink)
+latitudeSantoDomingo = 18.4861;
+longitudeSantoDomingo = -69.9312;
+altitudeSantoDomingo = 14;
+gsSantoDomingo = groundStation(sc, "Name", "Santo Domingo Station", ...
+    "Latitude", latitudeSantoDomingo, "Longitude", longitudeSantoDomingo, "Altitude", altitudeSantoDomingo);
 
-% Ground station in Riohacha (uplink for La Guajira)
-latitudeRiohacha = 11.5447;
-longitudeRiohacha = -72.9075;
-altitudeRiohacha = 0;
-gsRiohacha = groundStation(sc, "Name", "Riohacha Station", ...
-    "Latitude", latitudeRiohacha, "Longitude", longitudeRiohacha, "Altitude", altitudeRiohacha);
+% Ground station in Santiago (uplink for the Cibao region)
+latitudeSantiago = 19.4517;
+longitudeSantiago = -70.6970;
+altitudeSantiago = 178;
+gsSantiago = groundStation(sc, "Name", "Santiago Station", ...
+    "Latitude", latitudeSantiago, "Longitude", longitudeSantiago, "Altitude", altitudeSantiago);
 
-% Ground station in Leticia (uplink for the Amazon)
-latitudeLeticia = -4.2150;
-longitudeLeticia = -69.9406;
-altitudeLeticia = 0;
-gsLeticia = groundStation(sc, "Name", "Leticia Station", ...
-    "Latitude", latitudeLeticia, "Longitude", longitudeLeticia, "Altitude", altitudeLeticia);
+% Ground station in Barahona (uplink for the southwest and border region)
+latitudeBarahona = 18.2085;
+longitudeBarahona = -71.1008;
+altitudeBarahona = 10;
+gsBarahona = groundStation(sc, "Name", "Barahona Station", ...
+    "Latitude", latitudeBarahona, "Longitude", longitudeBarahona, "Altitude", altitudeBarahona);
 
 % --- VISUALIZATION ---
 % Visualize the scenario with satellites and ground stations
