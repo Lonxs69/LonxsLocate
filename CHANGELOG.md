@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0] - 2026-10-22
+### Cambiado
+- Las 15 estaciones terrenas ahora son de República Dominicana: 8 uplink (Santo Domingo, Santiago, La Romana, Puerto Plata, San Juan, Barahona, Higüey, San Francisco de Macorís) y 7 downlink rurales (Pedernales, Comendador, Dajabón, Jimaní, Neiba, Sabana Grande de Boyá, Constanza).
+- Enlace por defecto: Santo Domingo → LEO → Pedernales. GEO de respaldo sobre 70° O.
+- `FullSatelliteSimulation.m` carga las estaciones desde el CSV en lugar de tenerlas escritas a mano.
+- Finales de línea normalizados a LF.
+
+### Agregado
+- `ModulationofPackets.m`: número de paquetes y latencia configurables, con fragmentación de paquetes cuando la latencia supera el umbral.
+- `cobertura --csv` para exportar resultados.
+- Opción global `--estaciones` para analizar otro país o región.
+- `Makefile` con `test`, `lint`, `demo` y `cobertura`.
+
 ## [1.2.0] - 2026-10-22
 ### Agregado
 - Comando `cobertura`: simula 24 h de una constelación Walker y mide el porcentaje de tiempo con al menos un satélite visible por estación, el hueco máximo y los satélites visibles en promedio.
@@ -16,6 +29,6 @@
 
 ## [1.0.0]
 ### Inicial
-- Scripts de MATLAB (Satellite Communications Toolbox): enlace Bogotá → LEO → Uribia, modulación AM de paquetes, red no escalonada y simulación completa con 200 satélites LEO + 1 GEO.
-- Simulación en Cisco Packet Tracer para La Guajira.
+- Scripts de MATLAB (Satellite Communications Toolbox): enlace estación base → LEO → estación de bajada, modulación AM de paquetes, red no escalonada y simulación completa con 200 satélites LEO + 1 GEO.
+- Simulación de la red de acceso rural en Cisco Packet Tracer.
 - Videos de Universe Sandbox.
