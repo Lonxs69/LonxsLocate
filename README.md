@@ -32,25 +32,25 @@ La pregunta que responde el proyecto es: **¿cuántos satélites, en qué órbit
 
 Constelación Walker de 20 planos × 10 satélites a 629 km y 98° de inclinación, simulada durante 24 h con la rotación de la Tierra:
 
-| Estación downlink | Cobertura | Hueco máximo | Satélites visibles (prom.) |
-|---|:---:|:---:|:---:|
-| Amazonas rural | **100 %** | 0 min | 2.6 |
-| Vaupés rural | **100 %** | 0 min | 2.6 |
-| Putumayo rural | **100 %** | 0 min | 2.6 |
-| Vichada rural | **100 %** | 0 min | 2.6 |
-| Guainía rural | **100 %** | 0 min | 2.6 |
-| Chocó rural | 99.8 % | 1 min | 2.6 |
-| Uribia (La Guajira) | 99.3 % | 1 min | 2.7 |
+| Estación downlink | Provincia | Cobertura | Hueco máximo | Satélites visibles (prom.) |
+|---|---|:---:|:---:|:---:|
+| Pedernales | Pedernales | **100 %** | 0 min | 2.8 |
+| Comendador | Elías Piña | **100 %** | 0 min | 2.8 |
+| Dajabón | Dajabón | **100 %** | 0 min | 2.8 |
+| Jimaní | Independencia | **100 %** | 0 min | 2.8 |
+| Neiba | Bahoruco | **100 %** | 0 min | 2.8 |
+| Sabana Grande de Boyá | Monte Plata | **100 %** | 0 min | 2.8 |
+| Constanza | La Vega | **100 %** | 0 min | 2.8 |
 
-Comparativa del enlace **Bogotá → satélite → Uribia**:
+Comparativa del enlace **Santo Domingo → satélite → Pedernales**:
 
 | | LEO 600 km | GEO 35 786 km |
 |---|:---:|:---:|
-| Latencia extremo a extremo | **5.4 ms** | 239 ms |
+| Latencia extremo a extremo | **4.1 ms** | 241 ms |
 | Periodo orbital | 96.5 min | 23 h 56 min |
 | Radio de huella (elev. ≥ 10°) | 1 761 km | 7 944 km |
 
-> Con la red **no escalonada** (todos los planos en fase) la cobertura cae al ~50 % y aparecen huecos de más de 40 minutos. El escalonamiento entre planos es lo que hace viable la red.
+> Con una red **no escalonada** de 10 satélites (un satélite por plano, todos en fase) la cobertura cae al ~14 % y aparecen huecos de hasta 91 minutos. Agregar el GEO de respaldo tapa esos huecos, pero con 60 veces más latencia. El escalonamiento entre planos es lo que hace viable la red.
 
 ## ⚡ Inicio rápido
 
@@ -61,22 +61,22 @@ git clone https://github.com/Lonxs69/lonxsLocate.git
 cd lonxsLocate
 
 python -m lonxslocate estaciones              # las 15 estaciones terrenas
-python -m lonxslocate enlace                  # Bogotá → LEO → Uribia
+python -m lonxslocate enlace                  # Santo Domingo → LEO → Pedernales
 python -m lonxslocate huella 500 1200 35786   # periodo y cobertura por altitud
 python -m lonxslocate cobertura --geo         # simulación de 24 h
 ```
 
 ```text
 $ python -m lonxslocate enlace
-Enlace Bogotá → satélite (600 km) → Uribia
+Enlace Santo Domingo → satélite (600 km) → Pedernales
 
 Tramo   Elevación  Distancia  Latencia  FSPL @ 12000 MHz
 ------  ---------  ---------  --------  ----------------
-Subida  86.5°      598 km     2.00 ms   169.6 dB
-Bajada  33.2°      1,004 km   3.35 ms   174.1 dB
+Subida  83.3°      604 km     2.01 ms   169.6 dB
+Bajada  74.6°      620 km     2.07 ms   169.9 dB
 
-Latencia extremo a extremo: 5.35 ms  (ida y vuelta: 10.69 ms)
-Comparación con GEO en la misma longitud: 239.4 ms
+Latencia extremo a extremo: 4.08 ms  (ida y vuelta: 8.17 ms)
+Comparación con GEO en la misma longitud: 241.3 ms
 ```
 
 <details>
@@ -91,13 +91,16 @@ Comparación con GEO en la misma longitud: 239.4 ms
 | `--horas` / `--paso` | 24 / 60 | Duración y resolución de la simulación (h / s) |
 | `--elevacion` | 10 | Elevación mínima para considerar visible un satélite |
 | `--tipo` | todas | `uplink` o `downlink` |
-| `--geo` | no | Agrega un GEO de respaldo sobre 74° O |
+| `--geo` | no | Agrega un GEO de respaldo sobre 70° O |
 | `--no-escalonada` | no | Todos los planos en fase |
 | `--sin-rotacion` | no | Tierra fija, igual que en los scripts de MATLAB |
+| `--csv` | — | Exporta los resultados a un archivo CSV |
+
+Opción global: `--estaciones otro.csv` para analizar cualquier otro país o región con el mismo formato que [`data/estaciones.csv`](data/estaciones.csv).
 
 </details>
 
-Para correr los tests: `python -m unittest discover -s tests -v`
+Atajos con `make`: `make test`, `make demo`, `make cobertura`.
 
 ## 🛰️ Simulaciones
 
