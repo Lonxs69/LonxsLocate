@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Lint
+        run: pipx run ruff check lonxslocate tests
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Smoke test de la CLI
+        run: |
+          python -m lonxslocate enlace
+          python -m lonxslocate huella
+          python -m lonxslocate cobertura --horas 2 --paso 120 --tipo downlink
