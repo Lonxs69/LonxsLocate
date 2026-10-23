@@ -12,6 +12,14 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/Lonxs69/LonxsLocate/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/Lonxs69/LonxsLocate/actions)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-22c55e?style=for-the-badge)
 
+<br>
+
+![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)
+![Motor sin dependencias](https://img.shields.io/badge/motor-sin%20dependencias-2ea44f)
+![Licencia MIT](https://img.shields.io/badge/license-MIT-4da6ff)
+[![Estrellas](https://img.shields.io/github/stars/Lonxs69/LonxsLocate?style=flat&logo=github&color=yellow)](https://github.com/Lonxs69/LonxsLocate/stargazers)
+![Último commit](https://img.shields.io/github/last-commit/Lonxs69/LonxsLocate)
+
 **15 estaciones terrenas · 64 satélites bastan para cubrir el 100 % del país · ~4 ms de latencia vs. ~241 ms por GEO**
 
 [Contexto](#contexto) · [Resultados](#resultados) · [AWS](#aws) · [Inicio rápido](#inicio-rapido) · [Simulaciones](#simulaciones) · [Arquitectura](docs/arquitectura.md) · [Fundamentos](docs/fundamentos.md)
